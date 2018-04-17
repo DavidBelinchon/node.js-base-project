@@ -1,0 +1,29 @@
+------------------build-------------------
+
+docker build -t test . 
+
+------------------ RUN ----------------
+
+docker run -it -p 3000:3000 test
+
+
+
+/* Borrar contenidors parats */
+
+docker ps -q -a | xargs docker rm
+
+/* Borrar imatges amb nom <none> */
+
+docker rmi $(docker images | grep "^<none>" | awk '{print $3}')
+
+# stop all containers
+
+docker stop $(docker ps -a -q)
+
+# Delete all containers
+
+docker rm $(docker ps -a -q)
+
+# Delete all images
+
+docker rmi $(docker images -q)
